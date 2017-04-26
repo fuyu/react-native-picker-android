@@ -3,8 +3,8 @@
 import React, {Component, PropTypes} from 'react';
 import {
 	StyleSheet,
-	View, 
-	Text, 
+	View,
+	Text,
 	Image,
 	Dimensions,
 	PixelRatio,
@@ -94,7 +94,7 @@ export default class PickerAndroid extends Component{
 		this.middleHeight = Math.abs(-index * 40 + dy);
 		this.up && this.up.setNativeProps({
 			style: {
-				marginTop: (3 - index) * 30 + dy * .75,
+				marginTop: (3.5 - index) * 30 + dy * .75,
 			},
 		});
 		this.middle && this.middle.setNativeProps({
@@ -171,7 +171,7 @@ export default class PickerAndroid extends Component{
 
 	_renderItems(items){
 		//value was used to watch the change of picker
-		//label was used to display 
+		//label was used to display
 		let upItems = [], middleItems = [], downItems = [];
 		items.forEach((item, index) => {
 
@@ -203,7 +203,7 @@ export default class PickerAndroid extends Component{
 	}
 
 	_onValueChange(){
-		//the current picked label was more expected to be passed, 
+		//the current picked label was more expected to be passed,
 		//but PickerIOS only passed value, so we set label to be the second argument
 		//add by zooble @2015-12-10
 		var curItem = this.state.items[this.index];
@@ -216,17 +216,17 @@ export default class PickerAndroid extends Component{
 		let items = this._renderItems(this.state.items);
 
 		let upViewStyle = {
-			marginTop: (3 - index) * 30, 
-			height: length * 30, 
+			marginTop: (3.5 - index) * 30,
+			height: length * 30,
 		};
 		let middleViewStyle = {
-			marginTop:  -index * 40, 
+			marginTop:  -index * 40,
 		};
 		let downViewStyle = {
-			marginTop: (-index - 1) * 30, 
-			height:  length * 30, 
+			marginTop: (-index - 1) * 30,
+			height:  length * 30,
 		};
-		
+
 		return (
 			//total to be 90*2+40=220 height
 			<View style={[styles.container, this.state.pickerStyle]} {...this._panResponder.panHandlers}>
@@ -261,24 +261,32 @@ let ratio = PixelRatio.get();
 let styles = StyleSheet.create({
 
 	container: {
-		flex: 1,
+		flexGrow: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		//this is very important
 		backgroundColor: null
 	},
 	up: {
+    flex:1,
 		height: 90,
-		overflow: 'hidden'
+		backgroundColor: '#bdc0c7',
+		overflow: 'hidden',
+    marginBottom: 0,
+
 	},
 	upView: {
+    flexGrow: 1,
 		justifyContent: 'flex-start',
 		alignItems: 'center'
 	},
 	upText: {
+    flexGrow: 1,
 		paddingTop: 0,
 		height: 30,
-		fontSize: 20,
+    width: 200, // make a wider area for touch events
+    textAlign: 'center',
+		fontSize: 16,
 		color: '#000',
 		opacity: .5,
 		paddingBottom: 0,
@@ -291,7 +299,7 @@ let styles = StyleSheet.create({
 		overflow: 'hidden',
 		borderColor: '#aaa',
 		borderTopWidth: 1/ratio,
-		borderBottomWidth: 1/ratio
+		borderBottomWidth: 1/ratio,
 	},
 	middleView: {
 		height: 40,
@@ -300,6 +308,7 @@ let styles = StyleSheet.create({
 	},
 	middleText: {
 		paddingTop: 0,
+
 		height: 40,
 		color: '#000',
 		fontSize: 28,
@@ -308,6 +317,8 @@ let styles = StyleSheet.create({
 		marginBottom: 0
 	},
 	down: {
+    flex:1,
+		backgroundColor: '#bdc0c7',
 		height: 90,
 		overflow: 'hidden'
 	},
@@ -319,6 +330,8 @@ let styles = StyleSheet.create({
 	downText: {
 		paddingTop: 0,
 		height: 30,
+    width: 200, // make a wider area for touch events
+    textAlign: "center",
 		fontSize: 16,
 		color: '#000',
 		opacity: .5,
